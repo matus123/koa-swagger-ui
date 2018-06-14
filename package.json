@@ -1,0 +1,46 @@
+{
+  "name": "koa-swagger-ui",
+  "version": "1.0.0",
+  "description": "Swagger UI Koa",
+  "main": "./lib/index.js",
+  "files": [
+    "static",
+    "package.json",
+    "index.js",
+    "indexTemplate.html",
+    "swagger-ui-init.js",
+    "LICENSE"
+  ],
+  "scripts": {
+    "test": "exit 1"
+  },
+  "keywords": [
+    "swagger",
+    "express",
+    "ui",
+    "json",
+    "documentation"
+  ],
+  "private": false,
+  "engines": {
+    "node": ">= v8.9"
+  },
+  "license": "MIT",
+  "readmeFilename": "README.md",
+  "dependencies": {
+    "js-yaml": "3.12.0",
+    "json-refs": "3.0.4"
+  },
+  "devDependencies": {
+    "@types/jest": "23.1.0",
+    "@types/js-yaml": "3.11.1",
+    "@types/koa": "2.0.46",
+    "@types/koa-router": "^7.0.28",
+    "jest": "23.1.0",
+    "koa": "2.5.1",
+    "koa-router": "^7.4.0",
+    "ts-jest": "22.4.6",
+    "tslint": "5.10.0",
+    "typescript": "2.9.2"
+  }
+}
