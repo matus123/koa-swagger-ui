@@ -1,5 +1,5 @@
 import * as dot from 'dot';
-import * as static from 'koa-static';
+import * as staticServe from 'koa-static';
 import { Context } from 'koa';
 import * as path from 'path';
 
@@ -50,15 +50,16 @@ import * as path from 'path';
 //   return htmlWithCustomJs.replace('<% title %>', customeSiteTitle)
 // }
 
-var setup = function (swaggerDoc, opts, options, customCss, customfavIcon, swaggerUrl, customeSiteTitle) {
+function setup(swaggerDoc, opts, options, customCss, customfavIcon, swaggerUrl, customeSiteTitle) {
   var htmlWithOptions = generateHTML(swaggerDoc, opts, options, customCss, customfavIcon, swaggerUrl, customeSiteTitle)
-  return function (req, res) { res.send(htmlWithOptions) };
+  return (ctx: Context, next: () => Promise<void>) { ctx.send(htmlWithOptions); };
 };
 
 function swaggerInitFn(ctx: Context, next: () => Promise<any>) {
   if (ctx.url === '/swagger-ui-init.js') {
-    ctx.set('Content-Type', 'application/javascript')
-    return ctx.send(swaggerInit)
+    ctx.set('Content-Type', 'application/javascript');
+    ctx.body = (swaggerInit);
+    return;
   }
   return next();
 }
@@ -76,23 +77,7 @@ function swaggerInitFn(ctx: Context, next: () => Promise<any>) {
 //   }
 // }
 
-const serve = [swaggerInitFn, static() /*express.static(__dirname + '/static')*/];
-
-// var stringify = function (obj, prop) {
-//   var placeholder = '____FUNCTIONPLACEHOLDER____';
-//   var fns = [];
-//   var json = JSON.stringify(obj, function (key, value) {
-//     if (typeof value === 'function') {
-//       fns.push(value);
-//       return placeholder;
-//     }
-//     return value;
-//   }, 2);
-//   json = json.replace(new RegExp('"' + placeholder + '"', 'g'), function (_) {
-//     return fns.shift();
-//   });
-//   return 'var options = ' + json + ';';
-// };
+const serve = [swaggerInitFn, staticServe(path.join(__dirname, '/static'))];
 
 export {
   setup,
