@@ -13,8 +13,8 @@
     "pretty": true,
     "strictNullChecks": true,
     "strict": true,
-    "outDir": "build",
-    "watch": true
+    "outDir": "lib",
+    "declaration": true
   },
   "exclude": [
     "node_modules"
