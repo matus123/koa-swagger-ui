@@ -1,5 +1,5 @@
 {
-  "name": "swagger-ui",
+  "name": "swagger-ui-static",
   "version": "1.0.0",
   "description": "Swagger UI",
   "main": "lib/index.js",
